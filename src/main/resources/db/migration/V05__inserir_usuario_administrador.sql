@@ -1,0 +1,2 @@
+INSERT INTO usuario (nome, email, senha, ativo, data_nascimento) 
+VALUES ('admin', 'willian.ribeiro@policiacivil.sp.gov.br', '$2a$10$dowzDbo3WPBIZctsx6kNVu0OVtB7jootJ2b1ODAoBIax8Cn6KMPwu', 1, '1966-08-04');

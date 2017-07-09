@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:cofipa="http://cofipa.pc.com">
+	
+<head>
+	<title>Pesquisa de produtos</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa de produtos</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/produtos/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo Produto</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="GET" th:object="${produtoFilter}">
+			<div class="row">
+			     <div class="form-group  col-sm-12" >
+					<label class="control-label" for="nome">Descricao</label>
+					<input type="text" class="form-control" id="descricao" th:field="*{descricao}"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group  col-sm-3">
+					<label class="control-label" for="unidade">Unidade</label>
+					<select id="unidade" class="form-control" th:field="*{unidade}">
+	                    <option value="">Todos as unidades</option>
+	                    <option th:each="unidade : ${unidades}" th:text="${unidade.descricao}" th:value="${unidade.codigo}"></option>
+	                </select>
+				</div>
+				
+				<div class="form-group  col-sm-9">
+					<label class="control-label" for="fornecedor">fornecedor</label> 
+					<select id="fornecedor" class="form-control" th:field="*{fornecedor}">
+	                    <option value="">Todos os fornecedores</option>
+	                    <option th:each="fornecedor : ${fornecedores}" th:value="${fornecedor.codigo}" th:text="${fornecedor.nome}"></option>
+	                </select>
+				</div>
+			</div>
+			
+			<div class="row">
+			   <div class="col-sm-6  form-group">
+					<label for="valorDe">Valor unitário</label>
+					<div class="form-inline">
+						<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="valorDe" th:field="*{valorDe}"/>
+						<label for="valorAte" class="aw-form-label-between">até</label>
+						<input type="text" class="form-control  aw-form-control-inline-sm  js-decimal" id="valorAte" th:field="*{valorAte}"/>
+					</div>
+				</div>
+			</div>
+			
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+		
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<th class="table-produtos-col-foto"></th>
+						
+						<th class="table-produtos-col-descricao">
+						<cofipa:order page="${pagina}" field="descricao" text="Descricao"/>
+						</th>
+						
+						<th class="table-produtos-col-unidade">
+						<cofipa:order page="${pagina}" field="unidade" text="Unidade"/>
+						</th>
+								
+						<th class="table-produtos-col-fornecedor">
+						<th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'fornecedor', 'Fornecedor')"></th:block>
+						</th>
+						<th class="table-produtos-col-valortotal">Valor</th>
+						<th class="table-produtos-col-acoes"></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="produto : ${pagina.conteudo}">
+						<td class="text-center">
+							<img th:src="@{/fotos/thumbnail.{foto}(foto=${produto.fotoOuMock})}" class="img-responsive"/>
+						</td>
+						
+						<td th:text="${produto.descricao}">Produto Cartucho</td>
+						<td th:text="${produto.unidade.descricao}">Udn</td>
+						<td th:text="${produto.fornecedor.nome}">Kalunga</td>
+						<td class="text-right" th:text="|R$ ${produto.valortotal}|">R$ 8.00</td>
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Editar"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs" title="Excluir">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					  <tr>
+					    <tr th:if="${pagina.vazia}">
+					      <td colspan="6">Nenhum produto encontrado</td>
+						</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<cofipa:pagination page="${pagina}"/>
+	</div>
+
+</section>
+</body>
+</html>

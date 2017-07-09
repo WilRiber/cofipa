@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}">
+
+<head>
+	<title>Cadastro Tipos ativo/inativo</title>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+		
+			<div class="row">
+				<div class="col-sm-10">
+					<h1 th:if="${tipo.novo}">Cadastro Tipos ativo/inativo</h1>
+			<h1 th:unless="${tipo.novo}" th:text="|Edição do tipo - ${tipo.descricao}|">Cadastro do tipo</h1>
+				</div>
+				
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/tipos}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>		
+		</div>
+		
+	
+	<div class="container-fluid">
+		<th:block th:include="fragments/MensagemSucesso"></th:block>
+	
+		<form method="POST" th:object="${tipo}" 
+		th:action="@{/tipos/novo} ? @{/tipos/novo} : @{/tipos/{codigo}(codigo=${tipo.codigo})}">
+			<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+			
+			<input type="hidden" th:field="*{codigo}"/>
+			
+			<div class="row">
+				<div class="form-group  col-sm-12 bw-required" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+					<label for="descricao" class="control-label">Descrição</label>
+					<input type="text" class="form-control" id="descricao" autofocus="autofocus" th:field="*{descricao}"/>
+				</div>
+			</div>
+				
+			<button type="submit" class="btn  btn-primary">Salvar</button>
+		</form>
+	</div>
+</section>
+
+</html>

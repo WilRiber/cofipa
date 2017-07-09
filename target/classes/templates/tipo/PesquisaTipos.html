@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:cofipa="http://cofipa.pc.com">
+	
+<head>
+	<title>Pesquisa dos Tipos</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa dos tipos</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/tipos/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo tipo</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="GET" th:object="${tipoFilter}">
+			<div class="row">
+				<div class="form-group  col-sm-12">
+					<label class="control-label" for="descricao">Tipo</label>
+					<input type="text" class="form-control" id="unidade" autofocus="autofocus" th:field="*{descricao}"/>
+				</div>
+			</div>
+			
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+		
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						  
+						<th>
+							<cofipa:order page="${pagina}" field="descricao" text="Descricao"/>
+						</th>
+						<th class="table-col-acoes"></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="tipo : ${pagina.conteudo}">
+						<td th:text="${tipo.descricao}">Descrição</td>
+						
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs js-tooltip" title="Editar" 
+							th:href=" @{/tipos/{codigo}(codigo=${tipo.codigo})}"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir" href="#" 
+							     data:url="@{/tipos/{codigo}(codigo=${tipo.codigo})}"
+							     data:objeto="${tipo.descricao}">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					</tr>
+					<tr th:if="${pagina.vazia}">
+						<td colspan="3">Nenhum tipo encontrado</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<cofipa:pagination page="${pagina}"/>
+		
+	</div>
+
+</section>
+</body>
+</html>

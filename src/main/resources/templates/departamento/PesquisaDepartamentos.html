@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:cofipa="http://cofipa.pc.com">
+	
+<head>
+	<title>Pesquisa de Departamentos</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa de departamentos</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/departamentos/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo departamento</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="GET" th:object="${departamentoFilter}">
+			<div class="row">
+				<div class="form-group  col-sm-12">
+					<label class="control-label" for="nome">Departamento</label>
+					<input type="text" class="form-control" id="departamento" autofocus="autofocus" th:field="*{nome}"/>
+				</div>
+			</div>
+			
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+		
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						  
+						<th>
+							<cofipa:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
+						<th class="table-col-acoes"></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="departamento : ${pagina.conteudo}">
+						<td th:text="${departamento.nome}">Nome</td>
+						
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs js-tooltip" title="Editar" 
+							th:href=" @{/departamentos/{codigo}(codigo=${departamento.codigo})}"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir" href="#" 
+							     data:url="@{/departamentos/{codigo}(codigo=${departamento.codigo})}"
+							     data:objeto="${departamento.nome}">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					</tr>
+					<tr th:if="${pagina.vazia}">
+						<td colspan="3">Nenhum departamento encontrado</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<cofipa:pagination page="${pagina}"/>
+		
+	</div>
+
+</section>
+</body>
+</html>

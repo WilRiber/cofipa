@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:cofipa="http://cofipa.pc.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+	
+<head>
+	<title>Pesquisa Patrimonios Informática</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa de Patrimonios informática</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/patrimonioInformatica/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Novo Patrimonio</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="GET" th:object="${patrimonioInformaticaFilter}">
+			<div class="row">
+				<div class="form-group  col-sm-2">
+					<label class="control-label" for="numero">Nº Patrimônio</label>
+					<input type="text" class="form-control" id="numero" autofocus="autofocus" th:field="*{numero}"/>
+				</div>
+			
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="uge">Uge</label>
+					<select id="uge" class="form-control" th:field="*{uge}">
+	                    <option value="">Todas as uges</option>
+	                    <option th:each="uge : ${uges}" th:text="${uge.nome}" th:value="${uge.codigo}"></option>
+	                </select>
+				</div>
+			
+			<div class="form-group  col-sm-4">
+					<label class="control-label" for="serial">Serial</label>
+					<input type="text" class="form-control" id="serial" th:field="*{serial}"/>
+				</div>
+				</div>
+				
+				<div class="row">
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="itemMaterialInformatica">ItemMaterial</label>
+					<select id="itemMaterialInformatica" class="form-control" th:field="*{itemMaterialInformatica}">
+	                    <option value="">Todos os Itens</option>
+	                    <option th:each="itemMaterialInformatica : ${itensMateriaisInformatica}" th:text="${itemMaterialInformatica.descricao}" th:value="${itemMaterialInformatica.codigo}"></option>
+	                </select>
+				</div>
+			
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="materialInformatica">Equipamentos</label>
+					<select id="materialInformatica" class="form-control" th:field="*{materialInformatica}">
+	                    <option value="">Todos os materiais</option>
+	                    <option th:each="materialInformatica : ${materiaisInformatica}" th:text="${materialInformatica.descricao}" th:value="${materialInformatica.codigo}"></option>
+	                </select>
+				</div>
+			   </div>
+				
+				<div class="row">
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="departamento">Departamento</label>
+					<select id="departamento" class="form-control" th:field="*{departamento}">
+	                    <option value="">Todos os departamentos</option>
+	                    <option th:each="departamento : ${departamentos}" th:text="${departamento.nome}" th:value="${departamento.codigo}"></option>
+	                </select>
+				</div>
+			
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="divisao">Divisão</label>
+					<select id="divisao" class="form-control" th:field="*{divisao}">
+	                    <option value="">Todas as divisões</option>
+	                    <option th:each="divisao : ${divisoes}" th:text="${divisao.nome}" th:value="${divisao.codigo}"></option>
+	                </select>
+				</div>
+			
+			<div class="form-group  col-sm-4">
+					<label class="control-label" for="secao">Seções</label>
+					<select id="secao" class="form-control" th:field="*{secao}">
+	                    <option value="">Todas as seções</option>
+	                    <option th:each="secao : ${secoes}" th:text="${secao.nome}" th:value="${secao.codigo}"></option>
+	                </select>
+				</div>
+				</div>
+				
+				
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+		
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						<!-- <th class="table-patrimonioInformatica-col-foto"></th>  -->
+						
+						<th class="table-patrimoniosInformatica-col-numero">
+						<cofipa:order page="${pagina}" field="numero" text="Numero"/>
+						</th>
+						
+						<th class="table-patrimoniosInformatica-col-uge">
+						<cofipa:order page="${pagina}" field="uge" text="Uge"/>
+						</th>
+								
+						<th class="table-patrimoniosInformatica-col-serial">
+						<cofipa:order page="${pagina}" field="serial" text="Serial"/>
+						</th>
+						
+						<th class="table-patrimoniosInformatica-col-itemMaterial">
+						<cofipa:order page="${pagina}" field="itemMaterialInformatica" text="ItemMaterialInformatica"/>
+						</th>
+						
+						<th class="table-patrimoniosInformatica-col-equipamento">
+						<cofipa:order page="${pagina}" field="materialInformatica" text="MaterialInformatica"/>
+						</th>
+						
+						<th class="table-patrimoniosInformatica-col-departamento">
+						<cofipa:order page="${pagina}" field="departamento" text="Departamento"/>
+						</th>
+						
+						<th class="table-patrimoniosInformatica-col-divisao">
+						<cofipa:order page="${pagina}" field="divisao" text="Divisao"/>
+						</th>
+						
+						<th class="table-patrimoniosInformatica-col-secao">
+						<cofipa:order page="${pagina}" field="secao" text="Secao"/>
+						</th>
+						
+						
+						<th class="table-col-acoes"></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="patrimonioInformatica : ${pagina.conteudo}">
+ 
+						
+						<td th:text="${patrimonioInformatica.numero}">Nº Patrimônio</td>
+						<td th:text="${patrimonioInformatica.uge.nome}">Uge</td>
+						<td th:text="${patrimonioInformatica.serial}">Serial</td>
+						<td th:text="${patrimonioInformatica.itemMaterialInformatica.descricao}">Item Material</td>
+						<td th:text="${patrimonioInformatica.materialInformatica.descricao}">Equipamento</td>
+					    <td th:text="${patrimonioInformatica.departamento.nome}">Departamento</td>
+						<td th:text="${patrimonioInformatica.divisao.nome}">Divisão</td>
+						<td th:text="${patrimonioInformatica.secao.nome}">Seção</td> 
+						
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Editar"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs" title="Excluir">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					  <tr>
+					    <tr th:if="${pagina.vazia}">
+					      <td colspan="6">Nenhum produto encontrado</td>
+						</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<cofipa:pagination page="${pagina}"/>
+	</div>
+
+</section>
+</body>
+</html>

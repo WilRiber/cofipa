@@ -1,0 +1,164 @@
+/*
+######################
+# UTILIDADES
+######################
+*/
+.bw-glyphicon-large {
+	font-size: 18px;
+}
+
+.bw-required > .control-label:after {
+	content: "*";
+}
+
+/*
+######################
+# COMPONENTES
+######################
+*/
+
+/* Field Action */
+.bw-field-action {
+	display: flex;
+}
+
+.bw-field-action__icon {
+	margin: 6px 0 0 5px;
+}
+
+/* Upload */
+.bw-upload {
+	padding: 15px;
+	
+	border: 1px dashed #ddd;
+	border-radius: 4px;
+	background: #fafafa;
+	
+	text-align: center;
+}
+
+.bw-upload-form-file {
+	display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1px;
+}
+
+.bw-upload-form-file > input[type=file] {
+	position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    
+    font-size: 500px;
+}
+
+/* Tabela Simples */
+.bw-tabela-simples {
+	margin-top: 15px;
+}
+
+.bw-tabela-simples table tr th {
+	border-bottom-width: 1px;
+}
+
+.bw-tabela-simples table tr td {
+    border-top: none;
+    border-bottom: 1px solid #e7eaec;
+    padding: 10px;
+    vertical-align: middle;
+}
+/* Colunas comuns */
+.table-col-acoes {
+	width: 80px;
+}
+
+/* Colunas - Pesquisa de Produtos */
+.table-produtos-col-foto {
+	min-width: 40px;
+	width: 40px
+}
+
+.table-produtos-col-descricao {
+	
+}
+
+.table-produtos-col-unidade {
+	width: 100px;
+}
+
+.table-produtos-col-fornecedor {
+	width: 250px;
+}
+
+.table-produtos-col-valortotal {
+	width: 80px;
+	text-align: right;
+}
+
+.table-produtos-col-acoes {
+	width: 80px;
+}
+
+/* Colunas - Pesquisa de Fornecedores */
+.table-fornecedores-col-codigo {
+		text-align: lefth;
+}
+
+/* Colunas - Pesquisa de Fornecedores */
+.table-fornecedores-col-nome {
+ 		width: 340px;
+}
+
+.table-fornecedores-col-tipo-pessoa {
+	width: 110px;
+	text-align: center;
+}
+
+.table-fornecedores-col-cpf-cnpj {
+	width: 140px;
+	text-align: center;
+}
+
+.table-fornecedores-col-telefone {
+	width: 120px;
+	text-align: center;
+}
+
+.table-fornecedores-col-cidade-estado {
+	width: 10px;
+	text-align: right;
+}
+
+/* Colunas - Pesquisa de Departamentos */
+.table-departamentos-col-nome {
+	text-align: lefth;
+}
+
+/* Colunas - Pesquisa das Divisoes */
+.table-divisao-col-nome {
+	text-align: lefth;
+	
+}
+
+/* Colunas - Pesquisa das Secoes */
+.table-secao-col-nome {
+	text-align: lefth;
+	
+}
+
+/*
+######################################
+# CUSTOMIZAÇÃO DE COMPONENTES
+######################################
+*/
+
+.checkbox input[type="checkbox"]:checked + input + label::after {
+    font-family: 'FontAwesome';
+    content: "\f00c"; 
+}
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout/LayoutPadrao"
+	xmlns:cofipa="http://cofipa.pc.com">
+	
+<head>
+	<title>Pesquisa das Divisões</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Pesquisa das divisões</h1>
+				</div>
+				
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/divisoes/novo}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova Divisão</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<form method="GET" th:object="${divisaoFilter}">
+			<div class="row">
+			     <div class="form-group  col-sm-6" >
+					<label class="control-label" for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome" th:field="*{nome}"/>
+				</div>
+			
+				<div class="form-group  col-sm-6">
+					<label class="control-label" for="departamento">Departamento</label>
+					<select id="departamento" class="form-control" th:field="*{departamento}">
+	                    <option value="">Todos os Departamentos</option>
+	                    <option th:each="departamento : ${departamentos}" th:text="${departamento.nome}" th:value="${departamento.codigo}"></option>
+	                </select>
+				</div>
+			</div>
+				
+			
+			<button type="submit" class="btn  btn-primary">Pesquisar</button>
+		</form>
+		
+		<div class="table-responsive  bw-tabela-simples">
+			<table class="table  table-hover">
+				<thead>
+					<tr>
+						
+						
+						<th class="table-divisao-col-nome">
+						<cofipa:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
+						
+						<th class="table-departamento-col-nome">
+						<cofipa:order page="${pagina}" field="departamento" text="Departamento"/>
+						</th>
+						
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="divisao : ${pagina.conteudo}">
+					
+						
+						<td th:text="${divisao.nome}">Divisao</td>
+						  <td th:text="${divisao.departamento.nome}"></td> 
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs js-tooltip" title="Editar"
+							th:href=" @{/divisoes/{codigo}(codigo=${divisao.codigo})}"> 
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir" href="#"
+							     data:url="@{/divisoes/{codigo}(codigo=${divisao.codigo})}"
+							     data:objeto="${divisao.nome}">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					  <tr>
+					    <tr th:if="${pagina.vazia}">
+					      <td colspan="6">Nenhuma divisao encontrada</td>
+						</tr> 
+				</tbody>
+			</table>
+		</div>
+		
+		<cofipa:pagination page="${pagina}"/>
+	</div>
+
+</section>
+</body>
+</html>
