@@ -64,31 +64,31 @@ public class PatrimoniosInformaticaImpl implements PatrimoniosInformaticaQueries
 			   }
 			   
 			   if(isMaterialInformaticaPresent(filtro)){
-				   criteria.add(Restrictions.eq("MaterialInformatica", filtro.getMaterialInformatica()));
+				   criteria.add(Restrictions.eq("materialInformatica", filtro.getMaterialInformatica()));
 			   }
 			   
 			   if(isDepartamentoPresent(filtro)){
-				   criteria.add(Restrictions.eq("Departamento", filtro.getDepartamento()));
+				   criteria.add(Restrictions.eq("departamento", filtro.getDepartamento()));
 			   }
 			   
 			   if(isDivisaoPresent(filtro)){
-				   criteria.add(Restrictions.eq("Divisao", filtro.getDivisao()));
+				   criteria.add(Restrictions.eq("divisao", filtro.getDivisao()));
 			   }
 			   
 			   if(isSecaoPresent(filtro)){
-				   criteria.add(Restrictions.eq("Secao", filtro.getSecao()));
+				   criteria.add(Restrictions.eq("secao", filtro.getSecao()));
 			   }
 			   
 			   if(isAndarPresent(filtro)){
-				   criteria.add(Restrictions.eq("Andar", filtro.getAndar()));
+				   criteria.add(Restrictions.eq("andar", filtro.getAndar()));
 			   }
 			   
 			   if(isTipoSistemaPresent(filtro)){
-				   criteria.add(Restrictions.eq("TipoSistema", filtro.getTipoSistema()));
+				   criteria.add(Restrictions.eq("tipoSistema", filtro.getTipoSistema()));
 			   }
 			   
 			   if(isTipoPresent(filtro)){
-				   criteria.add(Restrictions.eq("Tipo", filtro.getTipo()));
+				   criteria.add(Restrictions.eq("tipo", filtro.getTipo()));
 			   }
 			   
 			   if(filtro.getSerial() != null) {

@@ -17,12 +17,13 @@ public class ProdutoSalvoEvent {
 		return produto;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
 	
 	public boolean temFoto() {
 		return !StringUtils.isEmpty(produto.getFoto());
+	}
+	
+	public boolean isNovaFoto() {
+		return produto.isNovaFoto();
 	}
 
 }

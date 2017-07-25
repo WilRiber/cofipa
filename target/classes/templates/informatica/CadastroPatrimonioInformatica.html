@@ -19,7 +19,8 @@
 			<div class="container-fluid">
 				<div class="row">
 				<div class="col-sm-10">
-					<h1>Cadastro de Patrimônios Informática</h1>
+					<h1 th:if="${patrimonioInformatica.novo}">Cadastro de Patrimônios Informática</h1>
+					<h1 th:unless="${patrimonioInformatica.novo}" th:text="|Edição do patrimônio nº ${patrimonioInformatica.numero}|">Cadastro de Patrimônios Informática</h1>
 				</div>
 				
 				<div class="col-sm-2">
@@ -36,9 +37,12 @@
 		<div class="container-fluid">
             
 
-		<form method="POST" th:object="${patrimonioInformatica}"
-		            th:action="@{/patrimonioInformatica/novo}"> 
+		<form method="POST" th:object="${patrimonioInformatica}" class="form-vertical  js-form-loading" 
+		             th:action="${patrimonioInformatica.novo} ? @{/patrimonioInformatica/novo} : @{/patrimonioInformatica/{codigo}(codigo=${patrimonioInformatica.codigo})}"> 
 		     <cofipa:message/>
+		     
+		     <input type="hidden" th:field="*{codigo}"/>
+		     
 				    <div class="row">
 					<div class="col-sm-2  form-group bw-required" cofipa:classforerror="numero">
 						<label for="numero" class="control-label">Nº Patrimônio</label>
@@ -208,6 +212,7 @@
 				    <div class="form-group  col-sm-12">
 					<input type="hidden" th:field="*{foto}">
 					<input type="hidden" th:field="*{contentType}">
+					<input type="hidden" th:field="*{novaFoto}">
 				
 					<label class="control-label">Foto</label>
 					
@@ -233,7 +238,7 @@
 
 <th:block layout:fragment="javascript-extra">
     <script th:src="@{/javascripts/patrimonio.combo.item-material-material.js}"></script>
-   <script th:src="@{/javascripts/patrimonio.combo.teste.js}"></script> 
+   <script th:src="@{/javascripts/patrimonio.combo.departamento-divisao-secao.js}"></script> 
    <script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
    <script th:src="@{/javascripts/vendors/upload.min.js}"></script>
    <script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>

@@ -2,8 +2,9 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/LayoutPadrao"
-	xmlns:cofipa="http://cofipa.pc.com">
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:cofipa="http://cofipa.pc.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
 	
 <head>
 	<title>Pesquisa das Divisões</title>
@@ -20,7 +21,7 @@
 				
 				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/divisoes/novo}">
+						<a class="btn  btn-default" th:href="@{/divisoes/nova}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova Divisão</span>
 						</a>
 					</div>

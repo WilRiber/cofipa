@@ -13,12 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,6 +33,7 @@ import com.pc.cofipa.repository.Produtos;
 import com.pc.cofipa.repository.Unidades;
 import com.pc.cofipa.repository.filter.ProdutoFilter;
 import com.pc.cofipa.service.CadastroProdutoService;
+import com.pc.cofipa.service.exception.ImpossivelExcluirEntidadeException;
 
 @Controller
 @RequestMapping("produtos")
@@ -57,8 +62,8 @@ public class ProdutosController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/novo", method = RequestMethod.POST)
-	public ModelAndView cadastrar(@Valid Produto produto, BindingResult result, Model model, RedirectAttributes attributes){
+	@RequestMapping(value = {"/novo", "{\\d+}"}, method = RequestMethod.POST)
+	public ModelAndView salvar(@Valid Produto produto, BindingResult result, Model model, RedirectAttributes attributes){
 		if(result.hasErrors()){
 			//throw new RuntimeException();
 			return novo(produto);
@@ -66,7 +71,7 @@ public class ProdutosController {
 		
 		
 		cadastroProdutoService.salvar(produto);
-		System.out.println(">>>Fornecedor: " + produto.getFornecedor());
+		//System.out.println(">>>Fornecedor: " + produto.getFornecedor());
 		attributes.addFlashAttribute("mensagem","Produto salvo com sucesso!");
 		return new ModelAndView("redirect:/produtos/novo");
 				
@@ -85,5 +90,24 @@ public class ProdutosController {
 		
 		return mv;
 	}
+	
+	@DeleteMapping("/{codigo}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Produto produto) {
+		try {
+		cadastroProdutoService.excluir(produto);
+		} catch (ImpossivelExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable("codigo") Produto produto) {
+		ModelAndView mv = novo(produto);
+		mv.addObject(produto);
+		
+		return mv;
+	}
+	
 
 }

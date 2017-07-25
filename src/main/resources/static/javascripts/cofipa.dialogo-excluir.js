@@ -15,7 +15,7 @@ Cofipa.DialogoExcluir = (function() {
 	}
 	
 	function onExcluirClicado(evento) {
-		event.preventDefault();
+		evento.preventDefault();
 		var botaoClicado = $(evento.currentTarget);
 		var url = botaoClicado.data('url');
 		var objeto = botaoClicado.data('objeto');

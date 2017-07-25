@@ -13,14 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 
 import org.hibernate.validator.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import org.springframework.util.StringUtils;
 
 
 @Entity
@@ -75,14 +75,12 @@ public class PatrimonioInformatica implements Serializable{
 	
 	@NotNull(message = "O tipo de material é obribatório")
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "codigo_material_informatica")
 	private MaterialInformatica materialInformatica;
 	
 	@NotNull(message = "O Item Material  é obrigatório")
 	@ManyToOne
-	@JsonIgnore
-	@JoinColumn(name = "codigo_item_material_informatica")
+    @JoinColumn(name = "codigo_item_material_informatica")
 	private ItemMaterialInformatica itemMaterialInformatica;
 	
 	@NotNull(message = "O tipo de sistema é obrigatório")
@@ -108,18 +106,15 @@ public class PatrimonioInformatica implements Serializable{
 	@NotNull(message = "O Departamento é obrigatório")
 	@ManyToOne
 	@JoinColumn(name = "codigo_departamento")
-	@JsonIgnore
 	private Departamento departamento;
 	
 	@NotNull(message = "A Divisão é obrigatória")
 	@ManyToOne
 	@JoinColumn(name = "codigo_divisao")
-	@JsonIgnore
 	private Divisao divisao;
 	
 	@NotNull(message = "A Seção é obrigatória")
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "codigo_secao")
 	private Secao secao;
 	
@@ -127,7 +122,10 @@ public class PatrimonioInformatica implements Serializable{
 	
 	@Column(name = "content_type")
 	private String contentType;
-
+	
+	@Transient
+	private boolean novaFoto;
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -304,10 +302,6 @@ public class PatrimonioInformatica implements Serializable{
 		this.secao = secao;
 	}
 	
-	public boolean isNovo() {
-		return codigo == null;
-	}
-	
 	public String getFoto() {
 		return foto;
 	}
@@ -322,6 +316,27 @@ public class PatrimonioInformatica implements Serializable{
 
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+	
+	public String getFotoOuMock(){
+		return !StringUtils.isEmpty(foto)? foto : "produto-mock.png";
+	}
+	
+	public boolean temFoto() {
+		return !StringUtils.isEmpty(this.foto);
+		
+	}
+	
+	public boolean isNovo(){
+		return codigo == null;
+	}
+	
+	public boolean isNovaFoto() {
+		return novaFoto;
+	}
+
+	public void setNovaFoto(boolean novaFoto) {
+		this.novaFoto = novaFoto;
 	}
 
 	@Override

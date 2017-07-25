@@ -21,7 +21,8 @@
 			<div class="container-fluid">
 			   <div class="row">
 			      <div class="col-xs-10">
-				     <h1>Cadastro de produtos</h1>
+				     <h1 th:if="${produto.novo}">Cadastro de produtos</h1>
+				     <h1 th:unless="${produto.novo}" th:text="|Edição da ${produto.descricao}|">Cadastro de produtos</h1>
 				   </div>
 				   
 				   <div class="col-xs-2"> 
@@ -39,8 +40,11 @@
 
 		     
 
-         <form method="POST" th:object="${produto}" class="form-vertical  js-form-loading" th:action="@{/produtos/novo}">
+         <form method="POST" th:object="${produto}" class="form-vertical  js-form-loading" 
+                   th:action="${produto.novo} ? @{/produtos/novo} : @{/produtos/{codigo}(codigo=${produto.codigo})}">
 		        <cofipa:message/>
+		        
+		        <input type="hidden" th:field="*{codigo}"/>
 			
 				<div class="row">
 				  <div class="col-sm-8  form-group bw-required" cofipa:classforerror="descricao">
@@ -98,6 +102,7 @@
 				<div class="form-group  col-sm-12">
 					<input type="hidden" th:field="*{foto}">
 					<input type="hidden" th:field="*{contentType}">
+					<input type="hidden" th:field="*{novaFoto}">
 				
 					<label class="control-label">Foto</label>
 					

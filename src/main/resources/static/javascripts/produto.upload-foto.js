@@ -5,6 +5,7 @@ Cofipa.UploadFoto = (function() {
 	function UploadFoto() {
 		this.inputNomeFoto = $('input[name=foto]');
 		this.inputContentType = $('input[name=contentType]');
+		this.novaFoto = $('input[name=novaFoto]');
 		
 		this.htmlFotoProdutoTemplate = $('#foto-produto').html();
 		this.template = Handlebars.compile(this.htmlFotoProdutoTemplate);
@@ -12,6 +13,8 @@ Cofipa.UploadFoto = (function() {
 		this.containerFotoProduto = $('.js-container-foto-produto');
 		
 		this.uploadDrop = $('#upload-drop');
+		
+		
 	}
 	
 	UploadFoto.prototype.iniciar = function () {
@@ -28,16 +31,28 @@ Cofipa.UploadFoto = (function() {
 		UIkit.uploadDrop(this.uploadDrop, settings);
 		
 		if (this.inputNomeFoto.val()){
-			onUploadCompleto.call(this, {nome: this.inputNomeFoto.val(), contentType: this.inputContentType.val()});
+			renderizarFoto.call(this, {nome: this.inputNomeFoto.val(), contentType: this.inputContentType.val()});
 		}
 	}
 	
 	function onUploadCompleto(resposta) {
+		this.novaFoto.val('true');
+	    renderizarFoto.call(this, resposta)
+	}
+	
+	function renderizarFoto(resposta){
 		this.inputNomeFoto.val(resposta.nome);
 		this.inputContentType.val(resposta.contentType);
 		
 		this.uploadDrop.addClass('hidden');
-		var htmlFotoProduto = this.template({nomeFoto: resposta.nome});
+		
+		var foto = '';
+		if(this.novaFoto.val() == 'true') {
+			foto = 'temp/';
+		}
+		foto += resposta.nome;
+		
+		var htmlFotoProduto = this.template({foto: foto});
 		this.containerFotoProduto.append(htmlFotoProduto);
 		
 		$('.js-remove-foto').on('click', onRemoverFoto.bind(this));
@@ -48,6 +63,7 @@ Cofipa.UploadFoto = (function() {
 		this.uploadDrop.removeClass('hidden');
 		this.inputNomeFoto.val('');
 		this.inputContentType.val('');
+		this.novaFoto.val('false');
 	}
 	
 	function adicionarCsrfToken(xhr) {

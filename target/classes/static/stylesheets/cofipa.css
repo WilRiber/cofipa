@@ -151,6 +151,53 @@
 	
 }
 
+/* Colunas - Pesquisa de Patrimonios */
+.table-patrimoniosInformatica-col-foto {
+	min-width: 40px;
+	width: 40px
+}
+
+.table-patrimoniosInformatica-col-numero {
+	
+}
+
+.table-patrimoniosInformatica-col-uge {
+	width: 100px;
+}
+
+.table-patrimoniosInformatica-col-serial {
+	width: 250px;
+}
+
+.table-patrimoniosInformatica-col-itemMaterialInformatica {
+	width: 100px;
+	
+}
+
+.table-patrimoniosInformatica-col-MaterialInformatica {
+	width: 100px;
+	
+}
+
+.table-patrimoniosInformatica-col-Departamento {
+	width: 100px;
+	
+}
+
+.table-patrimoniosInformatica-col-Divisao {
+	width: 100px;
+	
+}
+
+.table-patrimoniosInformatica-col-Secao {
+	width: 100px;
+	
+}
+
+.table-patrimoniosInformatica-col-acoes {
+	width: 80px;
+}
+
 /*
 ######################################
 # CUSTOMIZAÇÃO DE COMPONENTES

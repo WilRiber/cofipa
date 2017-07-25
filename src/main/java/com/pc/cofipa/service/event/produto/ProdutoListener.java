@@ -13,7 +13,7 @@ public class ProdutoListener {
 	private FotoStorage fotoStorage;
 	
 	
-	@EventListener(condition = "#evento.temFoto()")
+	@EventListener(condition = "#evento.temFoto() and #evento.novaFoto")
 	public void produtoSalvo(ProdutoSalvoEvent evento){
          fotoStorage.salvar(evento.getProduto().getFoto());
 		

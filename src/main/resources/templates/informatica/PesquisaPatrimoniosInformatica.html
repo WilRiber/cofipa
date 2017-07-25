@@ -54,24 +54,6 @@
 				
 				<div class="row">
 				<div class="form-group  col-sm-4">
-					<label class="control-label" for="itemMaterialInformatica">ItemMaterial</label>
-					<select id="itemMaterialInformatica" class="form-control" th:field="*{itemMaterialInformatica}">
-	                    <option value="">Todos os Itens</option>
-	                    <option th:each="itemMaterialInformatica : ${itensMateriaisInformatica}" th:text="${itemMaterialInformatica.descricao}" th:value="${itemMaterialInformatica.codigo}"></option>
-	                </select>
-				</div>
-			
-				<div class="form-group  col-sm-4">
-					<label class="control-label" for="materialInformatica">Equipamentos</label>
-					<select id="materialInformatica" class="form-control" th:field="*{materialInformatica}">
-	                    <option value="">Todos os materiais</option>
-	                    <option th:each="materialInformatica : ${materiaisInformatica}" th:text="${materialInformatica.descricao}" th:value="${materialInformatica.codigo}"></option>
-	                </select>
-				</div>
-			   </div>
-				
-				<div class="row">
-				<div class="form-group  col-sm-4">
 					<label class="control-label" for="departamento">Departamento</label>
 					<select id="departamento" class="form-control" th:field="*{departamento}">
 	                    <option value="">Todos os departamentos</option>
@@ -96,6 +78,24 @@
 				</div>
 				</div>
 				
+				<div class="row">
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="materialInformatica">Equipamentos</label>
+					<select id="materialInformatica" class="form-control" th:field="*{materialInformatica}">
+	                    <option value="">Todos os Equipamentos</option>
+	                    <option th:each="materialInformatica : ${materiaisInformatica}" th:text="${materialInformatica.descricao}" th:value="${materialInformatica.codigo}"></option>
+	                </select>
+				</div>
+			
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="tipo">Ativo/Inativo</label>
+					<select id="tipo" class="form-control" th:field="*{tipo}">
+	                    <option value="">Ativos/Inativos</option>
+	                    <option th:each="tipo : ${tipos}" th:text="${tipo.descricao}" th:value="${tipo.codigo}"></option>
+	                </select>
+				</div>
+			   </div>
+				
 				
 			<button type="submit" class="btn  btn-primary">Pesquisar</button>
 		</form>
@@ -104,7 +104,7 @@
 			<table class="table  table-hover">
 				<thead>
 					<tr>
-						<!-- <th class="table-patrimonioInformatica-col-foto"></th>  -->
+						<th class="table-patrimoniosInformatica-col-foto"></th>  
 						
 						<th class="table-patrimoniosInformatica-col-numero">
 						<cofipa:order page="${pagina}" field="numero" text="Numero"/>
@@ -117,15 +117,7 @@
 						<th class="table-patrimoniosInformatica-col-serial">
 						<cofipa:order page="${pagina}" field="serial" text="Serial"/>
 						</th>
-						
-						<th class="table-patrimoniosInformatica-col-itemMaterial">
-						<cofipa:order page="${pagina}" field="itemMaterialInformatica" text="ItemMaterialInformatica"/>
-						</th>
-						
-						<th class="table-patrimoniosInformatica-col-equipamento">
-						<cofipa:order page="${pagina}" field="materialInformatica" text="MaterialInformatica"/>
-						</th>
-						
+							
 						<th class="table-patrimoniosInformatica-col-departamento">
 						<cofipa:order page="${pagina}" field="departamento" text="Departamento"/>
 						</th>
@@ -136,37 +128,48 @@
 						
 						<th class="table-patrimoniosInformatica-col-secao">
 						<cofipa:order page="${pagina}" field="secao" text="Secao"/>
+						</th>	
+						
+						<th class="table-patrimoniosInformatica-col-equipamento">
+						<cofipa:order page="${pagina}" field="materialInformatica" text="MaterialInformatica"/>
 						</th>
 						
+						<th class="table-patrimoniosInformatica-col-tipo">
+						<cofipa:order page="${pagina}" field="tipo" text="Ativo/Inativo"/>
+						</th>
 						
-						<th class="table-col-acoes"></th>
+						<th class="table-patrimoniosInformatica-col-acoes"></th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr th:each="patrimonioInformatica : ${pagina.conteudo}">
- 
+					<tr th:each="patrimonioInformatica : ${pagina.conteudo}"> 
+                       <td class="text-center">
+							<img th:src="@{/fotos/thumbnail.{foto}(foto=${patrimonioInformatica.fotoOuMock})}" class="img-responsive"/>
+						</td>
 						
 						<td th:text="${patrimonioInformatica.numero}">Nº Patrimônio</td>
 						<td th:text="${patrimonioInformatica.uge.nome}">Uge</td>
 						<td th:text="${patrimonioInformatica.serial}">Serial</td>
-						<td th:text="${patrimonioInformatica.itemMaterialInformatica.descricao}">Item Material</td>
-						<td th:text="${patrimonioInformatica.materialInformatica.descricao}">Equipamento</td>
 					    <td th:text="${patrimonioInformatica.departamento.nome}">Departamento</td>
 						<td th:text="${patrimonioInformatica.divisao.nome}">Divisão</td>
-						<td th:text="${patrimonioInformatica.secao.nome}">Seção</td> 
-						
+						<td th:text="${patrimonioInformatica.secao.nome}">Seção</td>
+						<td th:text="${patrimonioInformatica.materialInformatica.descricao}">Equipamento</td>
+						<td th:text="${patrimonioInformatica.tipo.descricao}">Ativo/Inativo</td> 					
 						<td class="text-center">
-							<a class="btn  btn-link  btn-xs" title="Editar"> 
+							<a class="btn  btn-link  btn-xs js-tooltip" title="Editar"
+							      th:href="@{/patrimonioInformatica/{codigo}(codigo=${patrimonioInformatica.codigo})}"> 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
-							<a class="btn  btn-link  btn-xs" title="Excluir">
+							<a class="btn  btn-link  btn-xs js-tooltip js-exclusao-btn" title="Excluir" href="#" 
+							          data:url="@{/patrimonioInformatica/{codigo}(codigo=${patrimonioInformatica.codigo})}"
+							          data:objeto="${patrimonioInformatica.numero}">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</td>
 					  <tr>
 					    <tr th:if="${pagina.vazia}">
-					      <td colspan="6">Nenhum produto encontrado</td>
+					      <td colspan="6">Nenhum patrimonio encontrado</td>
 						</tr>
 				</tbody>
 			</table>
