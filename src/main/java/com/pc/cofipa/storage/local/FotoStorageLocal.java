@@ -97,6 +97,11 @@ public class FotoStorageLocal implements FotoStorage {
 	}
 	
 	@Override
+	public byte[] recuperar3Thumbnail(String fotoPatrimonioMobiliario) {
+		return recuperar(THUMBNAIL_PREFIX + fotoPatrimonioMobiliario);
+	}
+	
+	@Override
 	public void excluir(String foto) {
 		try {
 			Files.deleteIfExists(this.local.resolve(foto));

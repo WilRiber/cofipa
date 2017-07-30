@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:cofipa="http://cofipa.pc.com">
+	
+	
+	<head>
+    <title>Patrimônio Mobiliario</title>
+</head>
+
+<body>
+	
+<section layout:fragment="conteudo">
+
+		<div class="page-header">
+			<div class="container-fluid">
+				<div class="row">
+				<div class="col-sm-10">
+					<h1 th:if="${patrimonioMobiliario.novo}">Cadastro de Patrimônios Mobiliarios</h1>
+					<h1 th:unless="${patrimonioMobiliario.novo}" th:text="|Edição do patrimônio nº ${patrimonioMobiliario.numero}|">Cadastro de Patrimônios Mobiliarios</h1>
+				</div>
+				
+				<div class="col-sm-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/patrimonioMobiliario}" >
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<div class="container-fluid">
+            
+
+		<form method="POST" th:object="${patrimonioMobiliario}" class="form-vertical  js-form-loading"
+		               th:action="${patrimonioMobiliario.novo} ? @{/patrimonioMobiliario/novo} : @{/patrimonioMobiliario/{codigo}(codigo=${patrimonioMobiliario.codigo})}">
+		     <cofipa:message/>
+		     
+		       <input type="hidden" th:field="*{codigo}"/> 
+		     
+				    <div class="row">
+					<div class="col-sm-2  form-group bw-required" cofipa:classforerror="numero">
+						<label for="numero" class="control-label">Nº Patrimônio</label>
+						<input type="text" class="form-control" id="numero" autofocus="autofocus" th:field="*{numero}"/>						
+					</div>
+                  
+					<div class="col-sm-4  form-group bw-required" cofipa:classforerror="uge">
+						<label for="uge" class="control-label">Uge</label>
+						<div class="bw-field-action">
+						<select id="uge" class="form-control" th:field="*{uge}">
+							<option value="">Selecione a Uge</option>
+							<option th:each="uge : ${uges}" th:value="${uge.codigo}" th:text="${uge.nome}">Corregepol</option>
+						</select>
+					</div>
+					</div>				
+					<div class="col-sm-4  form-group bw-required">
+						<label for="serial" >Serial</label>
+						<input id="serial" type="text" class="form-control" th:field="*{serial}"/>
+					</div>
+					
+					
+					<div class="col-sm-2  form-group bw-required">
+						<label for="dataPatrimonio">Data</label>
+						<input id="dataPatrimonio" type="text" class="form-control js-date" th:field="*{dataPatrimonio}" autocomplete="off"/>
+					</div>
+					</div>
+					
+				  <div class="row">
+					<div class="col-sm-6  form-group bw-required" cofipa:classforerror="itemMaterialMobiliario">
+						<label for="itemMaterialMobiliario" class="control-label">ItemMaterialMobiliario</label>
+						<select id="itemMaterialMobiliario" class="form-control" th:field="*{itemMaterialMobiliario}">
+							<option value="">Selecione o Item</option>
+							 <option th:each="itemMaterialMobiliario : ${itensMateriaisMobiliario}" th:value="${itemMaterialMobiliario.codigo}" th:text="${itemMaterialMobiliario.descricao}">Mesa</option> 
+						</select> 	
+					</div>
+					 
+			        
+					<div class="col-sm-6  form-group bw-required" cofipa:classforerror="materialMobiliario">
+						<label for="materialMobiliario" class="control-label ">Tipo Material</label>
+						<div class="bw-field-action">
+						<input type="hidden" id="inputHiddenMaterialMobiliarioSelecionado" th:value="*{materialMobiliario} != null ? *{materialMobiliario.codigo}"/>
+						<select id="materialMobiliario" class="form-control" data:url="@{/materiaisMobiliario}" th:field="*{materialMobiliario}">			
+						</select>
+					    <div class="bw-field-action__icon js-img-loading">
+					    <img th:src="@{/layout/imagens/mini-loading.gif}"/>
+					</div>
+					</div>
+				</div>
+			</div>
+	               
+	               <div class="row">
+					<div class="col-sm-3  form-group bw-required " cofipa:classforerror="departamento">
+						<label for="departamento" class="control-label">Departamento</label>
+						<div class="bw-field-action">
+						<select id="departamento" class="form-control" th:field="*{departamento}">
+							<option value="">Selecione o Departamento</option>
+							<option th:each="departamento : ${departamentos}" th:value="${departamento.codigo}" th:text="${departamento.nome}">Corregepol</option>
+						</select>
+					</div>
+					</div>	
+					
+					<div class="col-sm-3  form-group  bw-required " cofipa:classforerror="divisao">
+						<label for="divisao" class="control-label">Divisão</label>
+						<div class="bw-field-action">
+							<input type="hidden" id="inputHiddenDivisaoSelecionada" th:value="*{divisao} != null ? *{divisao.codigo}"/>
+							  <select id="divisao" class="form-control" data:url="@{/divisoes}" th:field="*{divisao}">
+						</select>
+					    <div class="bw-field-action__icon js-img-loading" >
+					       <img th:src="@{/layout/imagens/mini-loading.gif}"/>
+					   </div>
+					 </div>
+				 </div>
+				
+			        
+					<div class="col-sm-6  form-group bw-required " cofipa:classforerror="secao">
+						<label for="secao" class="control-label">Seção</label>
+						<div class="bw-field-action">
+						  <input type="hidden" id="inputHiddenSecaoSelecionada" th:value="*{secao} != null ? *{secao.codigo}"/> 
+							  <select id="secao" class="form-control" data:url="@{/secoes}" th:field="*{secao}">		
+						</select>
+					<div class="bw-field-action__icon js-img-loading">
+					    <img th:src="@{/layout/imagens/mini-loading.gif}"/>
+					</div>
+					</div>
+				</div>
+			</div>		
+	              
+	               
+	               <div class="row">
+					<div class="col-sm-4  form-group  bw-required " cofipa:classforerror="andar">
+						<label for="andar" class="control-label">Andar</label>
+						<div class="bw-field-action">
+						<select id="andar" class="form-control" th:field="*{andar}">
+							<option value="">Selecione o Andar</option>
+							<option th:each="andar : ${andares}" th:value="${andar.codigo}" th:text="${andar.nome}">Finanças</option>
+						</select>
+					</div>
+					</div>
+				
+					<div class="col-sm-2  form-group  bw-required " cofipa:classforerror="sala">
+						<label for="Sala" class="control-label">Sala</label>
+						<input id="Sala" type="text" class="form-control " th:field="*{sala}"/>
+					</div>
+					
+						<div class="col-sm-3  form-group   bw-required ">
+						<label for="valor" >Valor</label>
+						<div class="input-group">
+							<div class="input-group-addon">R$</div>
+							<input id="valor" type="text" class="form-control  js-decimal" th:field="*{valor}"/>
+						</div>
+					</div>
+			        
+					<div class="col-sm-3  form-group bw-required " cofipa:classforerror="tipo">
+						<label for="tipo" class="control-label">Situação</label>
+						<div class="bw-field-action">
+						<select id="tipo" class="form-control" th:field="*{tipo}">
+							<option value="">Selecione a situação</option>
+							<option th:each="tipo : ${tipos}" th:value="${tipo.codigo}" th:text="${tipo.descricao}">Ativo</option>
+						</select>
+					</div>
+					</div>	
+	             </div>
+	           	
+	               <div class="row">
+					<div class="col-sm-2  form-group bw-required ">
+						<label for="conta">Nº Conta</label>
+						<input id="conta" type="text" class="form-control " th:field="*{conta}"/>
+					</div>
+					
+					<div class="col-sm-2  form-group bw-required ">
+						<label for="nl">Nª NL</label>
+						<input id="nl" type="text" class="form-control " th:field="*{nl}"/>
+					</div>
+					
+					<div class="col-sm-4  form-group bw-required ">
+						<label for="Antigo">Nº Patrimônio Antigo</label>
+						<input id="Antigo" type="text" class="form-control " th:field="*{antigo}"/>
+					</div>
+				</div>	
+			
+				<div class="form-group">
+					<label for="obs">Observações</label>
+					<textarea id="obs" rows="3" class="form-control" th:field=*{obs}></textarea>
+				</div>
+			
+				<div class="row">
+				    <div class="form-group  col-sm-12">
+					<input type="hidden" th:field="*{foto}">
+					<input type="hidden" th:field="*{contentType}">
+					<input type="hidden" th:field="*{novaFoto}">
+				
+					<label class="control-label">Foto</label>
+					
+					<div class="js-container-foto-produto" th:attr="data-url-fotos=@{/fotos}">
+						<div id="upload-drop" class="bw-upload">
+							<i class="glyphicon  glyphicon-cloud-upload"></i>
+							<span>Arraste a foto aqui ou </span>
+							<a class="bw-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="form-group">
+					<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+		
+			</form>
+		</div>
+		 <th:block th:replace="hbs/FotoProduto"></th:block>
+		
+</section>
+
+<th:block layout:fragment="javascript-extra">
+    <script th:src="@{/javascripts/patrimonio.combo.item-material-mobiliario.js}"></script>
+   <script th:src="@{/javascripts/patrimonio.combo.departamento-divisao-secao.js}"></script> 
+   <script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
+   <script th:src="@{/javascripts/vendors/upload.min.js}"></script>
+   <script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
+   <script th:src="@{/javascripts/produto.upload-foto.js}"></script>  
+  
+</th:block>
+	
+</body>
+</html>

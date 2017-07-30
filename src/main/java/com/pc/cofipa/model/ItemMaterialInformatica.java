@@ -14,9 +14,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-
-
-
 @Entity
 @Table(name = "item_material_informatica")
 public class ItemMaterialInformatica implements Serializable{
@@ -34,8 +31,6 @@ public class ItemMaterialInformatica implements Serializable{
 	@Column(name = "descricao_item_material_informatica")
 	private String descricao;
 	
-
-
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -80,8 +75,4 @@ public class ItemMaterialInformatica implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-
 }

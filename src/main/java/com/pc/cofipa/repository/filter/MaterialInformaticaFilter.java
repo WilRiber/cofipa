@@ -20,6 +20,8 @@ public class MaterialInformaticaFilter {
 	private Fornecedor fornecedor;
 	private Unidade unidade;
 	private ItemMaterialInformatica itemMaterialInformatica;
+	
+	
 	public String getDescricao() {
 		return descricao;
 	}

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.pc.cofipa.model.Fornecedor;
 import com.pc.cofipa.model.PatrimonioInformatica;
+import com.pc.cofipa.model.PatrimonioMobiliario;
 import com.pc.cofipa.model.Produto;
 import com.pc.cofipa.repository.Produtos;
 
@@ -56,6 +57,7 @@ public class JPAConfig {
 			factory.setPackagesToScan(Produto.class.getPackage().getName());
 			factory.setPackagesToScan(Fornecedor.class.getPackage().getName());
 			factory.setPackagesToScan(PatrimonioInformatica.class.getPackage().getName());
+			factory.setPackagesToScan(PatrimonioMobiliario.class.getPackage().getName());
 			//factory.setMappingResources("sql/consultas-nativas.xml");
 			factory.afterPropertiesSet();
 			return factory.getObject();

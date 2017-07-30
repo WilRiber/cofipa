@@ -200,8 +200,6 @@ public class MaterialInformatica implements Serializable{
 		this.itemMaterialInformatica = itemMaterialInformatica;
 	}
 	
-	
-
 	public String getFoto() {
 		return foto;
 	}
@@ -246,7 +244,5 @@ public class MaterialInformatica implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
 }

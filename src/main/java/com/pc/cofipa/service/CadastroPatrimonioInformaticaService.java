@@ -1,7 +1,5 @@
 package com.pc.cofipa.service;
 
-
-
 import javax.persistence.PersistenceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import com.pc.cofipa.service.event.patrimonioInformatica.PatrimonioInformaticaSa
 import com.pc.cofipa.service.exception.ImpossivelExcluirEntidadeException;
 
 import com.pc.cofipa.storage.FotoStorage;
-
 
 @Service
 public class CadastroPatrimonioInformaticaService {

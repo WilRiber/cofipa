@@ -48,7 +48,9 @@ import com.pc.cofipa.controller.converter.EstadoConverter;
 import com.pc.cofipa.controller.converter.FornecedorConverter;
 import com.pc.cofipa.controller.converter.GrupoConverter;
 import com.pc.cofipa.controller.converter.ItemMaterialInformaticaConverter;
+import com.pc.cofipa.controller.converter.ItemMaterialMobiliarioConverter;
 import com.pc.cofipa.controller.converter.MaterialInformaticaConverter;
+import com.pc.cofipa.controller.converter.MaterialMobiliarioConverter;
 import com.pc.cofipa.controller.converter.SecaoConverter;
 import com.pc.cofipa.controller.converter.TipoConverter;
 import com.pc.cofipa.controller.converter.TipoSistemaConverter;
@@ -130,6 +132,8 @@ public class WebConfig  extends WebMvcConfigurerAdapter implements ApplicationCo
 		conversionService.addConverter(new TipoConverter());
 		conversionService.addConverter(new TipoSistemaConverter());
 		conversionService.addConverter(new UgeConverter());
+		conversionService.addConverter(new ItemMaterialMobiliarioConverter());
+		conversionService.addConverter(new MaterialMobiliarioConverter());
 		
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);

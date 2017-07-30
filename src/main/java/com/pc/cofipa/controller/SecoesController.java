@@ -48,8 +48,8 @@ public class SecoesController {
 	@Autowired
 	private Secoes secoes;
 	
-	@RequestMapping("/novo")
-	public ModelAndView novo(Secao secao) {
+	@RequestMapping("/nova")
+	public ModelAndView nova(Secao secao) {
 		ModelAndView mv = new ModelAndView("secao/CadastroSecao");
 		mv.addObject("divisoes", divisoes.findAll());
 		return mv;
@@ -64,17 +64,17 @@ public class SecoesController {
 		return secoes.findByDivisaoCodigo(codigoDivisao);
 	}
 	
-	@RequestMapping(value = "/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "/nova", method = RequestMethod.POST)
 	public ModelAndView cadastrar(@Valid Secao secao, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return novo(secao);
+			return nova(secao);
 		}
 		
 		try {
 			cadastroSecaoService.salvar(secao);
 		} catch (NomeSecaoJaCadastradoException e) {
 			result.rejectValue("nome", e.getMessage(), e.getMessage());
-			return novo(secao);
+			return nova(secao);
 		
 	}
 		
@@ -107,7 +107,7 @@ public class SecoesController {
 	@GetMapping("/{codigo}")
 	public ModelAndView editar(@PathVariable Long codigo) {
 		Secao secao = secoes.findOne(codigo);
-		ModelAndView mv = novo(secao);
+		ModelAndView mv = nova(secao);
 		mv.addObject(secao);
 		return mv;
 	}

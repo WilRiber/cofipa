@@ -363,8 +363,5 @@ public class PatrimonioInformatica implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

@@ -14,8 +14,6 @@ import com.pc.cofipa.repository.ItensMateriaisInformatica;
 import com.pc.cofipa.service.exception.DescricaoItemMaterialInformaticaJaCadastradoException;
 import com.pc.cofipa.service.exception.ImpossivelExcluirEntidadeException;
 
-
-
 @Service
 public class CadastroItemMaterialInformaticaService {
 

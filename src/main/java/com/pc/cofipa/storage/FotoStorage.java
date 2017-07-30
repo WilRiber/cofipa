@@ -17,5 +17,7 @@ public interface FotoStorage {
 	public void excluir(String foto);
 
 	public byte[] recuperar2Thumbnail(String fotoPatrimonioInformatica);
+
+	public byte[] recuperar3Thumbnail(String fotoPatrimonioMobiliario);
 	
 }

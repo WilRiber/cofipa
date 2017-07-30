@@ -6,7 +6,7 @@
 	layout:decorate="~{layout/LayoutPadrao}">
 
 <head>
-	<title>Cadastro tipo Sistema</title>
+	<title>Cadastro tipo Sistema Operacional</title>
 </head>
 
 <section layout:fragment="conteudo">
@@ -16,7 +16,7 @@
 		
 			<div class="row">
 				<div class="col-sm-10">
-					<h1 th:if="${tipoSistema.novo}">Cadastro tipo sistema</h1>
+					<h1 th:if="${tipoSistema.novo}">Cadastro tipo sistema Operacional</h1>
 			<h1 th:unless="${tipoSistema.novo}" th:text="|Edição do Sistema - ${tipoSistema.nome}|">Cadastro tipos Sistema</h1>
 				</div>
 				

@@ -163,40 +163,102 @@
 
 .table-patrimoniosInformatica-col-uge {
 	width: 100px;
+	
 }
 
 .table-patrimoniosInformatica-col-serial {
 	width: 250px;
+	
 }
 
-.table-patrimoniosInformatica-col-itemMaterialInformatica {
+.table-patrimoniosInformatica-col-tipo {
 	width: 100px;
+	
 	
 }
 
 .table-patrimoniosInformatica-col-MaterialInformatica {
 	width: 100px;
 	
+	
 }
 
 .table-patrimoniosInformatica-col-Departamento {
 	width: 100px;
 	
+	
 }
 
 .table-patrimoniosInformatica-col-Divisao {
 	width: 100px;
+
 	
 }
 
 .table-patrimoniosInformatica-col-Secao {
 	width: 100px;
 	
+	
 }
 
 .table-patrimoniosInformatica-col-acoes {
 	width: 80px;
 }
+
+/* Colunas - Pesquisa de Patrimonios Mobiliarios */
+.table-patrimoniosMobiliario-col-foto {
+	min-width: 40px;
+	width: 40px
+}
+
+.table-patrimoniosMobiliario-col-numero {
+	
+}
+
+.table-patrimoniosMobiliario-col-uge {
+	width: 100px;
+	
+}
+
+.table-patrimoniosMobiliario-col-serial {
+	width: 250px;
+	
+}
+
+.table-patrimoniosMobiliario-col-tipo {
+	width: 100px;
+	
+	
+}
+
+.table-patrimoniosMobiliario-col-MaterialMobiliario {
+	width: 100px;
+	
+	
+}
+
+.table-patrimoniosMobiliario-col-Departamento {
+	width: 100px;
+	
+	
+}
+
+.table-patrimoniosMobiliario-col-Divisao {
+	width: 100px;
+
+	
+}
+
+.table-patrimoniosMobiliario-col-Secao {
+	width: 100px;
+	
+	
+}
+
+.table-patrimoniosMobiliario-col-acoes {
+	width: 80px;
+}
+
 
 /*
 ######################################

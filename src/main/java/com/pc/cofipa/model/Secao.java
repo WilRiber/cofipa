@@ -67,7 +67,7 @@ public class Secao implements Serializable {
 		this.divisao = divisao;
 	}
 	
-	public boolean isNovo() {
+	public boolean isNova() {
 		return codigo == null;
 	}
 
